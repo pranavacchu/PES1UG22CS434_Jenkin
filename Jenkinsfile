@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'make -C main' // This will run the Makefile in the 'main' folder
+        sh 'make -C main' 
       }
     }
     stage('Test') {
@@ -14,14 +14,14 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        echo 'Deploying...' // Placeholder for actual deployment steps
+        echo 'Deploying...'
       }
     }
   }
   
   post {
     failure {
-      echo 'Pipeline failed!' // If the pipeline fails, this message will be printed
+      echo 'Pipeline failed!' 
     }
   }
 }

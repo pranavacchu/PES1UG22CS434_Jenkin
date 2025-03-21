@@ -1,27 +1,35 @@
 pipeline {
-  agent any
-  
-  stages {
-    stage('Build') {
-      steps {
-        sh 'make -C main' 
-      }
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    sh 'g++ -o PES1UG22CS434-1 hello1.cpp'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    sh './PES1UG22CS434-1'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    echo 'Deploying application...'
+                }
+            }
+        }
     }
-    stage('Test') {
-      steps {
-        sh './main/hello_exec' // Runs the compiled hello.cpp program
-      }
+
+    post {
+        failure {
+            echo 'Pipeline failed!'
+        }
     }
-    stage('Deploy') {
-      steps {
-        echo 'Deploying...'
-      }
-    }
-  }
-  
-  post {
-    failure {
-      echo 'Pipeline failed!' 
-    }
-  }
 }
